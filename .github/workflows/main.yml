@@ -1,5 +1,3 @@
-name: Links
-
 on: [push]
 
 name: Broken Link Check
