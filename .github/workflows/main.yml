@@ -7,15 +7,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - uses: helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: crawler action step
         run: |
           export LOG=log.txt
           export URL=https://open-horizon.github.io/
           wget --no-directories --mirror --spider "$URL" 2>&1 | tee "$LOG";
           crawled_links=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
-          source "https://rubygems.org";
-          gem "jekyll";
-          bundle exec jekyll serve;
           ls;
           # repo_links=$(ls -R | grep ".html\|.js\|.css\|.png\|.md\|.scss");
           # echo $repo_links;
