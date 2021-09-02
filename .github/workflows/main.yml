@@ -9,7 +9,9 @@ jobs:
         uses: actions/checkout@v2
       - name: crawler action step
         run: |
+          export LOG=log.txt
+          export URL=https://open-horizon.github.io/
           declare -a MyArray;
           wget --no-directories --mirror --spider "$URL" 2>&1 | tee "$LOG";
           arr2=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
-          echo ${arr2[7]}
+          echo ${arr2[*]}
