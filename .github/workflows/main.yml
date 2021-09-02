@@ -13,9 +13,9 @@ jobs:
           export URL=https://open-horizon.github.io/
           wget --no-directories --mirror --spider "$URL" 2>&1 | tee "$LOG";
           crawled_links=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
-          cd _site;
-          repo_links=$(ls -R | grep ".html\|.js\|.css\|.png\|.md\|.scss");
-          echo $repo_links;
+          ls;
+          # repo_links=$(ls -R | grep ".html\|.js\|.css\|.png\|.md\|.scss");
+          # echo $repo_links;
           # orphan_pages_open_horizon=$(echo ${crawled_links[@]} ${repo_links[@]} | tr ' ' '\n' | sort | uniq -u)
           # echo "The orphan pages are : "
           # echo $orphan_pages_open_horizon
