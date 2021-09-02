@@ -10,7 +10,6 @@ jobs:
       - name: crawler action step
         run: |
         declare -a MyArray;
-        echo "This is entrypoint.sh";
         wget --no-directories --mirror --spider "$URL" 2>&1 | tee "$LOG";
         arr2=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
         echo ${arr2[7]}
