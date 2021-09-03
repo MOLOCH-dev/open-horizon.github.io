@@ -10,14 +10,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: crawler action step
-        run: |
-          export LOG=log.txt
-          export URL=https://open-horizon.github.io/
-          wget --no-directories --mirror --spider "$URL" 2>&1 | tee "$LOG";
-          crawled_links=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
-          ls;
-          repo_links=$(ls -R | grep ".html\|.js\|.css\|.png\|.md\|.scss");
-          echo $repo_links;
-          orphan_pages_open_horizon=$(echo ${crawled_links[@]} ${repo_links[@]} | tr ' ' '\n' | sort | uniq -u)
-          echo "The orphan pages are : "
-          echo $orphan_pages_open_horizon
+        uses: MOLOCH-dev/jekyll-orphan-pages-action@v1
+        id: crawler
+        with:
+          start-url: https://open-horizon.github.io/
+      - name: Get the orphan pages
+        run: echo "The time was ${{ steps.crawler.outputs.orphan-pages }}"
+        # run: |
+        #   export LOG=log.txt
+        #   export URL=https://open-horizon.github.io/
+        #   wget --no-directories --mirror --spider "$URL" 2>&1 | tee "$LOG";
+        #   crawled_links=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
+        #   ls;
+        #   repo_links=$(ls -R | grep ".html\|.js\|.css\|.png\|.md\|.scss");
+        #   echo $repo_links;
+        #   orphan_pages_open_horizon=$(echo ${crawled_links[@]} ${repo_links[@]} | tr ' ' '\n' | sort | uniq -u)
+        #   echo "The orphan pages are : "
+        #   echo $orphan_pages_open_horizon
