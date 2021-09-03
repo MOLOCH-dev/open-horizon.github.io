@@ -9,11 +9,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: crawler action step
-        uses: MOLOCH-dev/orphan-pages-action-jekyll@v1.4
-        id: crawler
-        with:
-          start-url: "https://open-horizon.github.io/"
+      # - name: crawler action step
+      #   uses: MOLOCH-dev/orphan-pages-action-jekyll@v1.4
+      #   id: crawler
+      #   with:
+      #     start-url: "https://open-horizon.github.io/"
       - name: Get the orphan pages
         run: |
           export LOG=log.txt
