@@ -15,6 +15,10 @@ jobs:
       #   with:
       #     start-url: "https://open-horizon.github.io/"
       - name: Get the orphan pages
+        id : crawler
+        outputs:
+          orphan-pages: # id of output
+            description: 'Orphan pages found'
         run: |
           export LOG=log.txt
           export URL=https://open-horizon.github.io/
@@ -22,6 +26,6 @@ jobs:
           crawled_links=(`grep -P -o -e '(?<=^--....-..-.. ..:..:..--  )(.*)' "$LOG"`);
           cd _site;
           repo_links=$(ls -R | grep ".html\|.js\|.css\|.png\|.md\|.scss");
-          orphan_pages_open_horizon=$(echo ${crawled_links[@]} ${repo_links[@]} | tr ' ' '\n' | sort | uniq -u)
+          ${{ steps.crawler.outputs.orphan-pages }}=$(echo ${crawled_links[@]} ${repo_links[@]} | tr ' ' '\n' | sort | uniq -u)
           echo "The orphan pages are : "
           echo $orphan_pages_open_horizon
