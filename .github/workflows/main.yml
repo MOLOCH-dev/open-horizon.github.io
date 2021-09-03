@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: crawler action step
-        uses: MOLOCH-dev/jekyll-orphan-pages-action@v1
+        uses: MOLOCH-dev/orphan-pages-action-jekyll@v1
         id: crawler
         with:
           start-url: https://open-horizon.github.io/
